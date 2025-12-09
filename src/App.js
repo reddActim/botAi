@@ -62,6 +62,7 @@ const theme = createTheme({
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [chat, setChat] = useState([])
 
   return (
     <ThemeProvider theme={theme}>
@@ -74,7 +75,7 @@ function App() {
 
           <Grid size={{ xs: 12, md: 10 }}>
             <Box sx={{width: "100%", height: "100%" }}>
-              <Outlet />
+              <Outlet context={{ chat:chat, setChat:setChat }} />
             </Box>
           </Grid>
         </Grid>

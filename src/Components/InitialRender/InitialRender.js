@@ -23,7 +23,7 @@ const initialData = [
 
 export default function InitialRender() {
     return (
-        <Stack sx={{ height: "100%", }}>
+        <Stack sx={{ height: "100%", justifyContent:"flex-end"}}>
             <Stack sx={{ minHeight: "50%", width: "100%", justifyContent: "center", alignItems: "center", gap: 2, paddingTop: 14, }}>
                 <Typography variant="h5" sx={{}}>How Can I Help You Today?</Typography>
                 <Box component="img" src={HeroIcon} alt="heroIcon" sx={{ width: "75px", height: "auto", objectFit: "contain" }} />
