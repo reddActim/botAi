@@ -19,9 +19,10 @@ const style = {
     p: 4,
 };
 
-export default function FeedBackModal({ open, setOpen }) {
+export default function FeedBackModal({ open, setOpen, chat, setChat }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [feedbackInput, setFeedbackInput] = React.useState("");
 
     return (
         <div>
@@ -31,26 +32,46 @@ export default function FeedBackModal({ open, setOpen }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={{ ...style, width: "60vw",  bgcolor: "primary.light" }}>
+                <Box sx={{ ...style, width: "60vw", bgcolor: "primary.light" }}>
                     <Stack sx={{ height: "100%" }}>
-                        <Stack direction="row" justifyContent="space-between">
-                            <Stack sx={{}} spacing={3} direction="row">
-                                <Box component="img" src={BulbIcon} style={{ width: "30px", height: "30px", alignSelf: "center" }} />
-                                <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: "center" }}>
-                                    Provide Additional Feedback
-                                </Typography>
+                        <Box component="form" onSubmit={e => {
+                            e.preventDefault();
+                              if (!chat || !chat.id) {
+    console.error("FeedbackModal: chat is missing or invalid");
+    return;
+  }
+                            setChat(prevChat => prevChat.map(msg => {
+                                if (msg.id === chat.id) {
+                                    return { ...msg, feedback: feedbackInput };
+                                }
+                                else return { ...msg }
+                        }));
+                            setFeedbackInput("");
+                            setOpen(false);
+                        }}>
+                            <Stack direction="row" justifyContent="space-between">
+                                <Stack sx={{}} spacing={3} direction="row">
+                                    <Box component="img" src={BulbIcon} style={{ width: "30px", height: "30px", alignSelf: "center" }} />
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: "center" }}>
+                                        Provide Additional Feedback
+                                    </Typography>
+                                </Stack>
+
+                                <Stack direction="row" justifyContent="flex-end" sx={{ margin: 0 }}><CloseIcon onClick={handleClose} sx={{ cursor: "pointer" }} /></Stack>
                             </Stack>
 
-                            <Stack direction="row" justifyContent="flex-end" sx={{ margin: 0 }}><CloseIcon onClick={handleClose} sx={{ cursor: "pointer" }} /></Stack>
-                        </Stack>
-
-                        <OutlinedInput fullWidth
-                            multiline
-                            minRows={6}
-                            sx={{ my: "20px" }} />
-                        <Stack direction="row" justifyContent="flex-end">
-                            <Button variant="contained" sx={{ textTransform: "none", backgroundColor: "primary.main", fontWeight: "510" }} onClick={{}}>Submit</Button>
-                        </Stack>
+                            <OutlinedInput fullWidth
+                                multiline
+                                minRows={6}
+                                name='feedbackInput'
+                                value={feedbackInput}
+                                placeholder="Write your feedback here..."
+                                onChange={(e) => setFeedbackInput(e.target.value)}
+                                sx={{ my: "20px" }} />
+                            <Stack direction="row" justifyContent="flex-end">
+                                <Button variant="contained" type="submit" sx={{ textTransform: "none", backgroundColor: "primary.main", fontWeight: "510" }} >Submit</Button>
+                            </Stack>
+                        </Box>
                     </Stack>
 
 

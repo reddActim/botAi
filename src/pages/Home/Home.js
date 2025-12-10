@@ -37,9 +37,9 @@ export default function Home() {
         setChatId(chatId + 2);
     };
 
-    useEffect(() => {
-        console.log("Chat updated:", chat);
-    }, [chat]);
+    // useEffect(() => {
+    //     console.log("Chat updated:", chat);
+    // }, [chat]);
 
     return (
         <>

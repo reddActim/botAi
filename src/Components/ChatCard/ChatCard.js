@@ -84,10 +84,16 @@ export default function ChatCard({ message , setChat}) {
                     <Rating
                         name="ratings"
                         value={RatingValue}
+                        sx={{color: "black"}}
                         onChange={(_event, newValue) => { 
                             setRatingValue(newValue) }} />
                 )}
-                <FeedBackModal open={open} setOpen={setOpen} chats={message} setChat={setChat} />
+                <FeedBackModal open={open} setOpen={setOpen} chat={message} setChat={setChat} />
+                {message.feedback && (
+                    <Typography variant="h6" sx={{  fontSize: "16px", fontStyle: "ubuntu", color: "black" }}>
+                        <strong>Feedback:</strong> {message.feedback}  
+                    </Typography>
+                )}
             </Box>
         </Stack>
     )
