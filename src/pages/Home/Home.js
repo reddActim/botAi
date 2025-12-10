@@ -37,6 +37,9 @@ export default function Home() {
         setChatId(chatId + 2);
     };
 
+    useEffect(() => {
+        console.log("Chat updated:", chat);
+    }, [chat]);
 
     return (
         <>
@@ -49,7 +52,7 @@ export default function Home() {
                 {chat.length > 0 && (
                     <Box sx={{ flexGrow: 1, overflowY: "scroll",scrollbarWidth: "none", p: 5, pb: 1, }}>
                         {chat.map(message => (
-                            <ChatCard key={message.id} message={message} />
+                            <ChatCard key={message.id} message={message} setChat={setChat} />
                         ))}
                     </Box>
                 )}
