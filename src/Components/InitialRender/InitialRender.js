@@ -21,18 +21,18 @@ const initialData = [
 ]
 
 
-export default function InitialRender() {
+export default function InitialRender({ generateResponse }) {
     return (
         <Stack sx={{ height: "100%", justifyContent:"flex-end"}}>
-            <Stack sx={{ minHeight: "50%", width: "100%", justifyContent: "center", alignItems: "center", gap: 2, paddingTop: 14, }}>
+            <Stack sx={{ minHeight: "50%", width: "100%", justifyContent: "center", alignItems: "center", gap: 2, }}>
                 <Typography variant="h5" sx={{}}>How Can I Help You Today?</Typography>
-                <Box component="img" src={HeroIcon} alt="heroIcon" sx={{ width: "75px", height: "auto", objectFit: "contain" }} />
+                <Box component="img" src={HeroIcon} alt="heroIcon" sx={{ width: "85px", height: "auto", objectFit: "contain", }} />
             </Stack>
-            <Box sx={{marginLeft:"20px", marginRight:"20px"}}>
-                            <Grid container sx={{ width: "100%",  boxSizing: "border-box", }} spacing={2}>
+            <Box sx={{margin: "20px", marginBottom: "40px", marginTop: "0px"}}>
+                            <Grid container sx={{ width: "100%",  boxSizing: "border-box", }} spacing={{xs: 1, md:2}}>
                 {initialData.map(chat => (
                     <Grid key={chat.heading} size={{ xs: 12, md: 6 }} sx={{}}>
-                        <Card heading={chat.heading} subtext={chat.subtext} handleClick={{}}/>
+                        <Card heading={chat.heading} subtext={chat.subtext} handleClick={()=>generateResponse(chat.heading)}/>
                     </Grid>
                 ))}                 
             </Grid>
@@ -45,7 +45,9 @@ export default function InitialRender() {
 export function Card({ heading, subtext, handleClick }) {
 
     return (
-        <Stack sx={{p:2, backgroundColor:"white"}} spacing={2} onClick={handleClick}>
+        <Stack sx={{p:2, backgroundColor:"white",
+            ":hover": { cursor: "pointer" , bgcolor: "rgba(79, 21, 215, 0.05) },"}
+        }} spacing={2} onClick={handleClick}>
             <Typography variant='h5' sx={{}}>{heading}</Typography>
             <Typography variant='body1' sx={{}}>{subtext}</Typography>
         </Stack>

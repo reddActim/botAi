@@ -1,24 +1,25 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Typography, Box, Stack, Button } from "@mui/material";
 import Navbar from "../../Components/Navbar/Navbar";
 import InitialRender from "../../Components/InitialRender/InitialRender";
-import {useOutletContext,} from "react-router-dom";
+import { useOutletContext, } from "react-router-dom";
 import { TextField, Input, OutlinedInput } from '@mui/material';
 import ChatBar from "../../Components/ChatBar/ChatBar";
 import data from "../../aiData/sampleData.json";
+import ChatCard  from "../../Components/ChatCard/ChatCard";
 
-export default function Home(){
-    const [initialRender, setInitialRender] = useState(true);   
-    const {chat, setChat}= useOutletContext();
+
+export default function Home() {
+    const { chat, setChat } = useOutletContext();
     const [chatId, setChatId] = useState(1);
 
-    const generateResponse = (input)=>{
+    const generateResponse = (input) => {
         console.log("Generating response for:", input);
         // Logic to generate AI response based on user input
         let aiResponse = data.find(item => item.question.toLowerCase() === input.toLowerCase());
-        let answer = aiResponse ? aiResponse.answer : "Sorry, Did not understand your query!";
+        let answer = aiResponse ? aiResponse.response : "Sorry, Did not understand your query!";
 
-        setChat(prev => [...prev, 
+        setChat(prev => [...prev,
         {
             type: "human",
             id: chatId,
@@ -27,7 +28,7 @@ export default function Home(){
         },
         {
             type: "ai",
-            id: chatId+1,
+            id: chatId + 1,
             text: answer,
             time: new Date(),
         }
@@ -36,20 +37,25 @@ export default function Home(){
         setChatId(chatId + 2);
     };
 
-    useEffect(()=>{
-        console.log("Chat updated:", chat);
-    }, [chat])
 
-    return(
+    return (
         <>
-        <Stack 
-        sx={{height: "100vh", background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)"}}
-        >
-            <Navbar />
-            {chat.length === 0 && ( <InitialRender generateResponse={generateResponse} />)}
+            <Stack
+                sx={{ height: "100vh", background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)" }}
+            >
+                <Navbar />
+                {chat.length === 0 && (<InitialRender generateResponse={generateResponse} />)}
 
-            <ChatBar generateResponse={generateResponse} chat={chat} clearChat={() => setChat([])} />
-        </Stack>
+                {chat.length > 0 && (
+                    <Box sx={{ flexGrow: 1, overflowY: "scroll",scrollbarWidth: "none", p: 5, pb: 1, }}>
+                        {chat.map(message => (
+                            <ChatCard key={message.id} message={message} />
+                        ))}
+                    </Box>
+                )}
+
+                <ChatBar generateResponse={generateResponse} chat={chat} clearChat={() => setChat([])} />
+            </Stack>
         </>
     )
 }
