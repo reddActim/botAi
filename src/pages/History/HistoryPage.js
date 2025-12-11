@@ -38,18 +38,20 @@ export default function HistoryPage() {
                     </Typography>
                 ) : (
                     sortedHistoryData.map((chat) => (
-                        <>
+                        <Box key={chat.id}>
                             <Typography key={chat.id} sx={{ marginLeft: "0.8rem", marginBottom: "6px" }}>{chat.date}</Typography>
                             <Stack key={chat.id} sx={{
                                 mb: 5, p: 3,
                                 background: "linear-gradient(90deg, #BFACE2 0%, #D7C7F4 100%)",
                                 borderRadius: 4
                             }}>
+                                <div>
                                 {chat.messages.map((message) => (
                                     <ChatCard key={message.id} message={message} readOnly />
                                 ))}
+                                </div>
                             </Stack>
-                        </>
+                        </Box>
                     ))
                 )}
             </Box>

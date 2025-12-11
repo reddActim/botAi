@@ -9,7 +9,7 @@ export default function Navbar({  setMenuOpen }) {
         sx={{background: "linear-gradient(180deg, rgba(215, 199, 244, 0.1) 0%, rgba(151, 133, 186, 0.1) 100%)"}}
         >
             {isMobile && <Button sx={{color:"black", width:"5px"}} onClick={() => setMenuOpen(true)}><MenuIcon sx={{alignSelf: "center"}} /></Button>}
-            <Typography variant="h5" sx={{alignSelf: "center", color: "primary.dark", fontWeight: "bold"}}>Bot AI </Typography>
+            <Typography variant="h5" sx={{alignSelf: "center", color: "primary.dark", fontWeight: "bold"}}>Bot AI</Typography>
         </Stack>
     )
 }

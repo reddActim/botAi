@@ -51,10 +51,15 @@ export default function ChatCard({ message, setChat, readOnly = false }) {
                 <Typography
                     variant="body1"
                     sx={{ fontWeight: "600" }}
-                ><span>{message.type === "human" ? "You" : "Soul Ai"}</span></Typography>
-                <Typography
-                    variant="body2"
-                ><p style={{ margin: "0px" }}>{message.text}</p></Typography>
+                ><span>{message.type === "human" ? "You" : "Soul Ai"}</span>
+                </Typography>
+                {message.type === "ai" ? (
+                    // AI response in <p>
+                    <p style={{ margin: "0px" }}>{message.text}</p>
+                ) : (
+                    // Human message styled with Typography
+                    <Typography variant="body2">{message.text}</Typography>
+                )}
                 <Stack direction="row" spacing={1} alignItems="center" sx={{ marginTop: "8px", marginBottom: "0px" }}>
                     <Typography
                         variant="body2"
