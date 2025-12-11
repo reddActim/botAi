@@ -51,7 +51,7 @@ export default function ChatCard({ message, setChat, readOnly = false }) {
                 <Typography
                     variant="body1"
                     sx={{ fontWeight: "600" }}
-                ><span>{message.type === "human" ? "You" : "Soul Ai"}</span>
+                ><span>{message.type === "human" ? "You" : "Soul AI"}</span>
                 </Typography>
                 {message.type === "ai" ? (
                     // AI response in <p>
