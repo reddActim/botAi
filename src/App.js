@@ -26,7 +26,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Ubuntu, sans-serif',
-     fontSize: 14,
+    fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
@@ -52,12 +52,12 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#D7C7F4',
-         textTransform: "none", 
-         borderRadius: "8px",
+          textTransform: "none",
+          borderRadius: "8px",
+        },
       },
     },
-  },
-}
+  }
 });
 
 function App() {
@@ -69,13 +69,13 @@ function App() {
       <>
         <CssBaseline />
         <Grid container sx={{ height: "100vh" }}>
-          <Grid size={{ xs: 0, md: 2 }} sx={{overflow:"hidden"}}>
-            <Box sx={{ width: "100%", height: "100%" }}> <Sidebar /></Box>
+          <Grid size={{ xs: 0, md: 2 }} sx={{ overflow: "hidden" }}>
+            <Box sx={{ width: "100%", height: "100%" }}> <Sidebar clearChat={() => setChat([])} /></Box>
           </Grid>
 
           <Grid size={{ xs: 12, md: 10 }}>
-            <Box sx={{width: "100%", height: "100%" }}>
-              <Outlet context={{ chat:chat, setChat:setChat }} />
+            <Box sx={{ width: "100%", height: "100%" }}>
+              <Outlet context={{ chat: chat, setChat: setChat }} />
             </Box>
           </Grid>
         </Grid>

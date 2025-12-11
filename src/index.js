@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './pages/Home/Home';
+import HistoryPage from './pages/History/HistoryPage';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "history",
-        element: <><h1>History</h1></>
+        element: <HistoryPage />
       },
       {
         path: "/",
