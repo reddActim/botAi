@@ -7,11 +7,13 @@ import { TextField, Input, OutlinedInput } from '@mui/material';
 import ChatBar from "../../Components/ChatBar/ChatBar";
 import data from "../../aiData/sampleData.json";
 import ChatCard  from "../../Components/ChatCard/ChatCard";
+import Sidebar from "../../Components/SIdebar";
 
 
 export default function Home() {
     const { chat, setChat } = useOutletContext();
     const [chatId, setChatId] = useState(1);
+
 
     const generateResponse = (input) => {
         console.log("Generating response for:", input);
@@ -44,9 +46,11 @@ export default function Home() {
     return (
         <>
             <Stack
-                sx={{ height: "100vh", background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)" }}
+                sx={{ height: "100%", background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)", 
+                    overflow: "hidden"
+                }}
             >
-                <Navbar />
+
                 {chat.length === 0 && (<InitialRender generateResponse={generateResponse} />)}
 
                 {chat.length > 0 && (

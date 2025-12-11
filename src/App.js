@@ -3,10 +3,12 @@ import { Outlet } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import { Grid, createTheme, ThemeProvider, Box } from "@mui/material";
+import { Grid, createTheme, ThemeProvider, Box, useMediaQuery, Stack } from "@mui/material";
 import React, { useState } from 'react';
 import Sidebar from './Components/SIdebar';
+import Navbar from './Components/Navbar/Navbar';
 
+// personalized theme for consistent styling
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -62,22 +64,35 @@ const theme = createTheme({
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  //when opened on maxWidth: 960px show sidebar with clearchat, setMenuOpen(false) on click of closeIcon in sidebar
+
   const [chat, setChat] = useState([])
+  const isMobile = useMediaQuery('(max-width:960px)');
 
   return (
     <ThemeProvider theme={theme}>
       <>
         <CssBaseline />
         <Grid container sx={{ height: "100vh" }}>
+
           <Grid size={{ xs: 0, md: 2 }} sx={{ overflow: "hidden" }}>
-            <Box sx={{ width: "100%", height: "100%" }}> <Sidebar clearChat={() => setChat([])} /></Box>
+            <Box sx={{ width: "100%", height: "100%" }}>
+              <Sidebar clearChat={() => setChat([])} closeMenu={() => setMenuOpen(false)} />
+            </Box>
           </Grid>
 
           <Grid size={{ xs: 12, md: 10 }}>
-            <Box sx={{ width: "100%", height: "100%" }}>
-              <Outlet context={{ chat: chat, setChat: setChat }} />
-            </Box>
+            <Stack sx={{ width: "100%", height: "100vh" }}>
+              {isMobile && menuOpen && (
+                <Box sx={{ position: "fixed", zIndex: "999", height: "100vh", backgroundColor: "rgba(255, 255, 255, 1)", minWidth: "40%", boxShadow: "2px 0px 10px rgba(0,0,0,0.1)" }}>
+                  <Sidebar clearChat={() => setChat([])} closeMenu={() => setMenuOpen(false)} mobileView />
+                </Box>
+              )}
+              <Navbar  setMenuOpen={setMenuOpen} />
+              <Outlet context={{ chat: chat, setChat: setChat, menuOpen: menuOpen, setMenuOpen: setMenuOpen }} />
+            </Stack>
           </Grid>
+
         </Grid>
       </>
     </ThemeProvider>

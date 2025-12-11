@@ -21,12 +21,14 @@ export default function HistoryPage() {
     return (
         <Stack
             sx={{
-                height: "100vh",
+                height: "100%",
                 background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
                 alignItems: "center",
+                overflowY: "hidden",
+                p: 2,
             }}
         >
-            <Typography variant="h5" sx={{ margin: "5rem 3rem", fontSize: 32, fontWeight: "500", letterSpacing: 0.5, fontFamily: "Ubuntu" }}>
+            <Typography variant="h5" sx={{ margin: "4rem 3rem", fontSize: 32, fontWeight: "500", letterSpacing: 0.5, fontFamily: "Ubuntu" }}>
                 Conversation History
             </Typography>
             <Box sx={{ flexGrow: 1, overflowY: "scroll", scrollbarWidth: "none", p: 5, pb: 1, width: "100%" }}>

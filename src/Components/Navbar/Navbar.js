@@ -1,12 +1,14 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Typography, Stack, useMediaQuery } from '@mui/material'
+import { Typography, Stack, useMediaQuery, Button } from '@mui/material'
 
 
-export default function Navbar() {
-    const isMobile = useMediaQuery('(max-width:600px)');
+export default function Navbar({  setMenuOpen }) {
+    const isMobile = useMediaQuery('(max-width:960px)');
     return(
-        <Stack direction="row" spacing={2} p={2}>
-            {isMobile && <MenuIcon sx={{alignSelf: "center"}} />}
+        <Stack direction="row" spacing={2} p={2}
+        sx={{background: "linear-gradient(180deg, rgba(215, 199, 244, 0.1) 0%, rgba(151, 133, 186, 0.1) 100%)"}}
+        >
+            {isMobile && <Button sx={{color:"black", width:"5px"}} onClick={() => setMenuOpen(true)}><MenuIcon sx={{alignSelf: "center"}} /></Button>}
             <Typography variant="h5" sx={{alignSelf: "center", color: "primary.dark", fontWeight: "bold"}}>Bot AI </Typography>
         </Stack>
     )
